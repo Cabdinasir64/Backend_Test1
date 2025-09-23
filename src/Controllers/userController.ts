@@ -26,7 +26,7 @@ export const createUser = (req: Request, res: Response) => {
     const { name, email } = req.body;
     const newUser = { id: users.length + 1, name, email };
     users.push(newUser);
-    res.status(201).json(newUser);
+    res.status(201).json({ message: 'User created', newUser });
 };
 
 export const updateUser = (req: Request, res: Response) => {
@@ -36,11 +36,12 @@ export const updateUser = (req: Request, res: Response) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     user.name = name || user.name;
     user.email = email || user.email;
-    res.json(user);
+    res.json({ message: 'User updated', user });
 };
 
 export const deleteUser = (req: Request, res: Response) => {
     const id = Number(req.params.id);
     users = users.filter(u => u.id !== id);
+    if (!users.find(u => u.id === id)) return res.status(404).json({ message: 'User not found' });
     res.json({ message: 'User deleted' });
 };
