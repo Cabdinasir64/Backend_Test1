@@ -41,7 +41,13 @@ export const updateUser = (req: Request, res: Response) => {
 
 export const deleteUser = (req: Request, res: Response) => {
     const id = Number(req.params.id);
+
+    const userExists = users.find(u => u.id === id);
+    if (!userExists) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
     users = users.filter(u => u.id !== id);
-    if (!users.find(u => u.id === id)) return res.status(404).json({ message: 'User not found' });
+
     res.json({ message: 'User deleted' });
 };
