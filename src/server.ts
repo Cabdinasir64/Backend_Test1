@@ -3,7 +3,9 @@ import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes'
 import authRoutes2 from './routes/authRoutes2'
 import logger from './Middleware/logger';
+import authBcrypt from './routes/authBcrypt'
 import dotenv from 'dotenv';
+
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.use(logger);
 app.use('/users', userRoutes);
 app.use('/', authRoutes);
 app.use('/', authRoutes2)
+app.use("/auth", authBcrypt);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
