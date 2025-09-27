@@ -9,16 +9,22 @@ export const contactUs = async (req: Request, res: Response) => {
     }
 
     try {
+        const textTemplate = `
+        New contact message from your website:
+        Name: ${name}
+        Email: ${email}
+        Message: ${message}`;
+        
         await sendEmail(
             process.env.EMAIL_USER!,
             `New Contact from ${name}`,
-            `Email: ${email}\n\nMessage:\n${message}`
+            textTemplate,
+            email
         );
 
         res.json({ success: true, message: "Message sent successfully!" });
     } catch (error) {
         res.status(500).json({ error: "Failed to send message" });
-        console.log(error)
+        console.log(error);
     }
-
 };
