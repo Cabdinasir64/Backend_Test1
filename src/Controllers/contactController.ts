@@ -14,7 +14,7 @@ export const contactUs = async (req: Request, res: Response) => {
         Name: ${name}
         Email: ${email}
         Message: ${message}`;
-        
+
         await sendEmail(
             process.env.EMAIL_USER!,
             `New Contact from ${name}`,
