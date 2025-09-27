@@ -5,6 +5,7 @@ import authRoutes2 from './routes/authRoutes2'
 import logger from './Middleware/logger';
 import authBcrypt from './routes/authBcrypt'
 import contactRoutes from './routes/contactRoutes'
+import userRoutess from './routes/userRoutess'
 import dotenv from 'dotenv';
 
 
@@ -22,6 +23,7 @@ app.use('/', authRoutes);
 app.use('/', authRoutes2)
 app.use("/auth", authBcrypt);
 app.use("/api", contactRoutes);
+app.use('/userss', userRoutess);
 
 
 app.listen(PORT, () => {
